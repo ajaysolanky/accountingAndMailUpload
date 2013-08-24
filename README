@@ -1,0 +1,3 @@
+The accounting portion of this program takes in .csv files with accounting information, then uploads the contents to the database. The mailing portion of this program takes in .csv files with mailing information, updates the appropriate html template with said information, and then mails the emails out using the SendGrid API.
+
+This software was built by Ajay Solanky under the guidance of Aaron Cooke as a part of his internship at Julep Beauty Inc.

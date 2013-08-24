@@ -1,0 +1,29 @@
+@(errList : List[models.Error])
+
+<!--Authored by Ajay Solanky-->
+<!--Copyright Julep Beauty Inc. 2013-->
+
+<h1>Errors:</h1>
+
+<table border="1" width="100%">
+    <tr>
+        <td>Error ID</td>
+        <td>Upload ID</td>
+        <td>Type</td>
+        <td>Subtype</td>
+        <td>Message</td>
+        <td>Created At</td>
+        <td>Updated At</td>
+    </tr>
+    @for(i <- 0 to (errList.length-1)) {
+    <tr>
+        <td>@errList(i).getId()</td>
+        <td>@errList(i).getUploadId()</td>
+        <td>@errList(i).getType()</td>
+        <td>@errList(i).getSubtype()</td>
+        <td>@errList(i).getMessage()</td>
+        <td>@errList(i).getCreatedAt()</td>
+        <td>@errList(i).getUpdatedAt()</td>
+    </tr>
+    }
+</table>

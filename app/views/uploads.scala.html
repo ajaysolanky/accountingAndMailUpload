@@ -1,0 +1,45 @@
+@(upList : List[Upload], pageType : String)
+
+<!--Authored by Ajay Solanky-->
+<!--Copyright Julep Beauty Inc. 2013-->
+
+<script src='@routes.Assets.at("javascripts/jquery-1.9.0.min.js")'></script>
+<script src = '@routes.Assets.at("javascripts/upload.js")'></script>
+@if(pageType=="accounting"){
+    <link rel="stylesheet" href='@routes.Assets.at("stylesheets/main.css")'>
+}else{
+    <link rel="stylesheet" href='@routes.Assets.at("stylesheets/mail.css")'>
+}
+
+<table border="1" width="100%" id="uploadTable">
+    <tr class="uploadrow">
+        <td>File Name</td>
+        <td>Date Uploaded</td>
+        <td>Processing Time</td>
+        <td>Type</td>
+        <td>Record Count</td>
+        <td>Error Count</td>
+        <td>Skip Count</td>
+        <td>Delete</td>
+    </tr>
+    @for(i <- 0 to (upList.length-1)) {
+        @if(pageType == upList(i).getType()) {
+            <tr class="uploadRow">
+                <td>@upList(i).getFileName()</td>
+                <td>@upList(i).getUploadedDate()</td>
+                <td>@upList(i).getProcessingTime()</td>
+                <td>@upList(i).getType()</td>
+                <td>@upList(i).getRecordCount()</td>
+                <td><a href="@routes.Application.viewErrorsAction">@upList(i).getErrorCount()</a></td>
+                <td>@upList(i).getSkipCount()</td>
+                <td>
+                    <button id=@upList(i).getId class="delete">Delete</button>
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+</br></br></br>
+<h3>Reset All Tables:</h3>
+<button type="submit" value="reset" id="reset">Reset</button>

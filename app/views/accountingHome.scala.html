@@ -1,0 +1,89 @@
+<!--Authored by Ajay Solanky-->
+<!--Copyright Julep Beauty Inc. 2013-->
+
+<script src='@routes.Assets.at("javascripts/jquery-1.9.0.min.js")'></script>
+<script src = '@routes.Assets.at("javascripts/upload.js")'></script>
+<link rel="stylesheet" href='@routes.Assets.at("stylesheets/main.css")'>
+
+<h1 id="header">Accounting File Upload</h1>
+
+<div id="status">
+    <table id="success" style="background-color: #99FF66" width="100%"><tr><td>NO ERRORS.</td></tr></table>
+
+    <table cellspacing="0" cellpadding="0" width="100%" style="background-color: #E06666" id="failures">
+        <tr height="20px">
+            <td>
+                <table cellspacing="0" cellpadding="0"  width="100%">
+                    <tr>
+                        <th id="fileHeader">File Name</th>
+                        <th id="messageHeader">Error Message</th>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="statusDiv">
+                    <table cellspacing="0" cellpadding="0" border="1"  width="100%" style="border-color: black" id="errorTable"></table>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div id="loading">
+    LOADING. PLEASE DON'T CLOSE THIS WINDOW. COULD TAKE SEVERAL MINUTES.
+    <meter value="0" id="progress"></meter>
+</div>
+
+
+<div id="loaded">
+    <div style="float:left">
+        <h2>Submit a Folder</h2>
+        <form style="float:left" action = "@routes.Application.uploadFileAction" method="post" enctype="multipart/form-data" target="upload_target">
+            <input type="file" id="info" name="fileUp" webkitdirectory="" directory="">
+            <input value="accounting" name="type" style="width:0;height:0;border:0px solid #fff;">
+            <button type="submit" class="fileSubmit">Submit</button>
+        </form>
+    </div>
+
+    <div style="float:right; margin-top:0">
+        <h2>Submit a Single file:</h2>
+        <form action = "@routes.Application.uploadFileAction" method="post" enctype="multipart/form-data" target="upload_target">
+            <input type="file" name="fileUp">
+            <input value="accounting" name="type" style="width:0;height:0;border:0px solid #fff;">
+            <button type="submit" class="fileSubmit">Submit</button>
+        </form>
+    </div>
+    </br></br></br></br></br>
+
+    <h2>Files from current batch:</h2>
+
+    <table border="1" width="100%" id="uploadTable">
+        <div id = "topRow">
+            <tr class="uploadrow">
+                <td>File Name</td>
+                <td>Date Uploaded</td>
+                <td>Processing Time</td>
+                <td>Type</td>
+                <td>Record Count</td>
+                <td>Error Count</td>
+                <td>Skip Count</td>
+                <td>Delete</td>
+            </tr>
+        </div>
+    </table>
+
+    <form action="@routes.Application.viewUploads" id="viewUploads"><input name="type" value="accounting" hidden="true"></form>
+
+    <h2><a onclick="document.getElementById('viewUploads').submit();" style="color: #0000FF;text-decoration: underline; cursor: pointer">View all Upload Records</a></h2>
+
+    <h2><a href ="@routes.Application.viewErrorsAction" style="color: #0000FF">View all Error Records</a></h2>
+
+    </br></br></br>
+    <h3>Reset All Tables:</h3>
+    <button type="submit" value="reset" id="reset">Reset</button>
+</div>
+
+
+<div id="frameContainer"><iframe id="upload_target" style="width:0;height:0;border:0px solid #fff;"></iframe></div>

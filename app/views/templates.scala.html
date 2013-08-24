@@ -1,0 +1,48 @@
+@(upList : List[Upload])
+
+<!--Authored by Ajay Solanky-->
+<!--Copyright Julep Beauty Inc. 2013-->
+
+<script src='@routes.Assets.at("javascripts/jquery-1.9.0.min.js")'></script>
+<script src = '@routes.Assets.at("javascripts/upload.js")'></script>
+<link rel="stylesheet" href='@routes.Assets.at("stylesheets/mail.css")'>
+
+<h1 id="header">Mail Template uploader</h1>
+
+<h2>UPLOAD A TEMPLATE:</h2>
+<form action = "@routes.Application.uploadFileAction" method="post" enctype="multipart/form-data" target="upload_target">
+    <input type="file" name="fileUp">
+    <input value="template" name="type" style="width:0;height:0;border:0px solid #fff; visibility: hidden">
+    <button type="submit" class="fileSubmit">Submit</button>
+</form>
+
+<table border="1" width="100%" id="uploadTable">
+    <tr class="uploadrow">
+        <td>File Name</td>
+        <td>Date Uploaded</td>
+        <td>Processing Time</td>
+        <td>Type</td>
+        <td>Record Count</td>
+        <td>Error Count</td>
+        <td>Skip Count</td>
+        <td>Delete</td>
+    </tr>
+    @for(i <- 0 to (upList.length-1)) {
+        @if(upList(i).getType()=="template") {
+            <tr class="uploadRow">
+                <td>@upList(i).getFileName()</td>
+                <td>@upList(i).getUploadedDate()</td>
+                <td>@upList(i).getProcessingTime()</td>
+                <td>@upList(i).getType()</td>
+                <td>@upList(i).getRecordCount()</td>
+                <td><a href="@routes.Application.viewErrorsAction">@upList(i).getErrorCount()</a></td>
+                <td>@upList(i).getSkipCount()</td>
+                <td>
+                    <button id=@upList(i).getId class="delete">Delete</button>
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<div id="frameContainer"><iframe id="upload_target" style="width:0;height:0;border:0px solid #fff;"></iframe></div>

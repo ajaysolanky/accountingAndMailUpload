@@ -1,0 +1,33 @@
+#Authored by Ajay Solanky
+#Copyright Julep Beauty Inc. 2013
+
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index()
+
+# uploads
+GET     /accountingHomeView         controllers.Application.accountingHomeView()
+POST    /uploadFileAction           controllers.Application.uploadFileAction()
+GET     /viewUploads                controllers.Application.viewUploads()
+POST    /deleteUploadAction         controllers.Application.deleteUploadAction()
+POST    /reset                      controllers.Application.reset()
+GET     /jsonUploadTable            controllers.Application.jsonUploadTable()
+GET     /jsonErrorTable             controllers.Application.jsonErrorTable()
+
+#mail
+GET     /mail                       controllers.Application.mail()
+GET     /sendMail                   controllers.Application.sendMail()
+POST    /processMailFiles           controllers.Application.processMailFiles()
+GET     /viewTemplates              controllers.Application.viewTemplates()
+
+# errors
+GET     /viewErrorsAction           controllers.Application.viewErrorsAction()
+
+#Insufficient permissions
+GET     /showAccessDenied           controllers.Application.showAccessDenied()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
